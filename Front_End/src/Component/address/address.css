@@ -1,0 +1,39 @@
+#rightside{
+    border-left: 0.5px solid rgb(207, 204, 204);
+}
+.card{
+    border: 0.5px solid rgb(207, 204, 204);
+}
+.address{
+    font-size: 14px;
+}
+#button{
+    border: none;
+    background-color: white;
+    font-size: 13px;
+}
+#button:focus{
+    outline: none;
+}
+.delivery{
+    font-size: 13px;
+    color: rgb(126, 123, 123)
+}
+.deliveryFor{
+    font-size: 15px;
+    color: rgb(126, 123, 123)
+}
+.priceDetails{
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(59, 57, 57);
+}
+.continue{
+    width: 100%;
+    background-color: rgb(218, 65, 90);
+    border: none;
+    color: white;
+    height: 35px;
+    font-weight: bold;
+    border-radius: 2px;
+}

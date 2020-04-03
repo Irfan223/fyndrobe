@@ -1,0 +1,32 @@
+var express = require("express");
+var router = express.Router();
+var CusLogin = require('../controllers/Login.js');
+var CusRegister = require('../controllers/Register.js');
+var Address = require('../controllers/Address.js');
+var mens_products = require('../controllers/men-products.js');
+var womens_products = require('../controllers/women-products.js');
+var boys_products = require('../controllers/boys-products.js');
+var girls_products = require('../controllers/girls-products.js');
+var mobile_backcover = require('../controllers/mobile-backcover.js');
+var Admin            = require('../controllers/admin.js');
+var InventryAPI      = require('../controllers/InventryAPI.js');
+var ImageUpload      = require('../controllers/imageUpload.js');
+var testAPI = require('../controllers/testAPI.js');
+
+router.route('/cusLogin').post(CusLogin.CustomerLogin);
+router.route('/cusRegister').post(CusRegister.CustomerRegister);
+router.route('/address').get(Address.GetAddress);
+router.route('/address').post(Address.AddAddress);
+router.route('/address').delete(Address.DeleteAddress);
+router.route('/address').put(Address.UpdateAddress);
+router.route('/mensProducts').post(mens_products.mens_Products);
+router.route('/womensProducts').post(womens_products.womens_Products);
+router.route('/boysProducts').post(boys_products.boys_Products);
+router.route('/girlsProducts').post(girls_products.girls_Products);
+router.route('/mobileBackcover').get(mobile_backcover.mobile_backcover);
+router.route('/admin').post(Admin.Admin);
+router.route('/inventryAPI').post(InventryAPI.InventryAPI);
+router.route('/imageUpload').get(ImageUpload.ImageUpload);
+router.route('/testAPI').get(testAPI.testAPI);
+//
+module.exports = router;

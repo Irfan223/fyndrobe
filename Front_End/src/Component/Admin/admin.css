@@ -1,0 +1,45 @@
+.body{
+    /* background-color: rgb(9, 45, 65); */
+    /* height: 700px; */
+    margin-top: -70px;
+}
+#Login-Form {
+    margin-left: 35%;
+    width: 30%;
+    /* background-color: darkcyan; */
+}
+.form{
+    padding: 5%;
+}
+.buttonAdmin{
+    background-color: rgb(9, 45, 65);
+    border: none;
+}
+.buttonAdmin:focus{
+    outline: none;
+}
+input[type=email] {
+width: 100%;
+/* height: 40px; */
+text-indent: 10px;
+font-size: larger;
+}
+input[type=password] {
+    width: 100%;
+    /* height: 40px; */
+    text-indent: 10px;
+    font-size: larger;
+}
+input[type=submit] {
+    width: 100%;
+    /* height: 40px; */
+    color: white;
+    font-size: larger;
+}
+.title{
+    text-align: center;
+    /* color: white; */
+}
+#user-action{
+    padding:0 0 0 25px;
+}
