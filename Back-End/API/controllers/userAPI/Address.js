@@ -1,6 +1,6 @@
 
 
-const Customer = require('../models/customer');
+const Customer = require('../../models/customer');
 // Get Customer Details
 module.exports.GetAddress = function (req, res, next) {
     Customer.findOne({ email: 'cseirfan17@gmail.com' }, 'address', function (err, user) {

@@ -1,5 +1,5 @@
 const multer = require('multer')
-const maxSize = 2 * 1024 *1024;
+const maxSize = 15 * 1024 *1024;
 module.exports = upload =  multer({
     storage: multer.diskStorage({}),
     limits: {fileSize: maxSize},

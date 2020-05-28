@@ -1,7 +1,7 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Admin = require('../models/admin');
+const Admin = require('../../models/admin');
 module.exports.Admin = function (req, res, next) {
     var userId;
     var type;
@@ -23,9 +23,6 @@ module.exports.Admin = function (req, res, next) {
             });
         } else {
             bcrypt.compare(req.body.password, user.password, function (err, result) {
-                if (err) {
-                    res.json({ message: err, code: 5 })
-                }
                 if (result == true) {
                     // generating token
                     const token = jwt.sign({
@@ -37,14 +34,16 @@ module.exports.Admin = function (req, res, next) {
                         }
                     );
                     // end token
-                    // res.cookie('firstName', user.firstName).send('cookies set');
-                    // res.cookie('lastName', user.lastName);
-                    // res.cookie('email', user.email);
-                    // res.cookie('mobile', user.mobile);
-                    // res.cookie('token', token);
+                    const maxAge = 365 * 24 * 60 * 60 * 1000;
+                    res.cookie('userId', user._id, { maxAge: maxAge, httpOnly: false });
+                    res.cookie('firstName', user.firstName, { maxAge: maxAge, httpOnly: false });
+                    res.cookie('lastName', user.lastName, { maxAge: maxAge, httpOnly: false });
+                    res.cookie('email', user.email, { maxAge: maxAge, httpOnly: false });
+                    res.cookie('mobile', user.mobile, { maxAge: maxAge, httpOnly: false });
                     res.json({
                         message: 'Successfully Logged In',
                         code: 1,
+                        token: token
                     });
                 } else {
                     res.json({

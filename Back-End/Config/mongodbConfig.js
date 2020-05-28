@@ -9,7 +9,8 @@ module.exports = {
     mongoose.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
+      useFindAndModify: false
     });
     connection = mongoose.connection;
     connection.on('error', console.error.bind(console, 'connection error:'));

@@ -9,12 +9,13 @@ const cutomerSchema = new mongoose.Schema({
     mobile: { type: Number, required: true },
     password: { type: String, required: true },
     address: {
-        locality: String,
-        areaOrstreet: String,
-        cityOrDistOrTown: String,
-        state: String,
-        landmark: String,
-        pincode: Number
-    }
+        locality: {type: String, "default": null},
+        areaOrstreet: {type: String, "default": null},
+        cityOrDistOrTown: {type: String, "default": null},
+        state: {type: String, "default": null},
+        landmark: {type: String, "default": null},
+        pincode: {type: Number, "default": null},
+    },
+    cart: {type: Array, "default": 0}
 });
 module.exports = mongoose.model('customers', cutomerSchema);

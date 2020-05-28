@@ -3,7 +3,7 @@
 const bcrypt = require('bcrypt');
 const mongoose = require("mongoose");
 const saltRounds = 10;
-const Admin = require('../models/admin');
+const Admin = require('../../models/admin');
 module.exports.AdminSignup  = function (req, res) {
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
         if (err) {

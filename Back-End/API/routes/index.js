@@ -1,23 +1,26 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 // Admin js file---
-var Admin            = require('../controllers/adminLogin');
-var AdminSignup     = require('../controllers/adminSignup')
-var InventryAPI      = require('../controllers/inventryAPI');
-var ImageUpload      = require('../controllers/imageUpload');
+const Admin            = require('../controllers/adminAPI/adminLogin');
+const AdminSignup     = require('../controllers/adminAPI/adminSignup')
+const InventryAPI      = require('../controllers/adminAPI/InventryAPI');
+const ImageUpload      = require('../controllers/adminAPI/imageUpload');
 
 // User js file---
-var CusLogin = require('../controllers/userLogin');
-var CusRegister = require('../controllers/userSignup');
-var Address = require('../controllers/address');
-var clothe = require('../controllers/clotheAPI');
-// var mobile_backcover = require('../controllers/mobile-backcover');
+const CusLogin = require('../controllers/userAPI/userLogin');
+const CusRegister = require('../controllers/userAPI/userSignup');
+const Address = require('../controllers/userAPI/Address');
+const clothe = require('../controllers/userAPI/productAPI');
 
 // Admin API--
 router.route('/adminLogin').post(Admin.Admin);
 router.route('/adminRegister').post(AdminSignup.AdminSignup);
-router.route('/inventryAPI').post(InventryAPI.InventryAPI);
+router.route('/inventryAPI').post(InventryAPI.PostInventry);
+router.route('/inventryAPI').get(InventryAPI.GetInventry);
+router.route('/inventryAPI/:id').get(InventryAPI.GetInventry);
+router.route('/inventryAPI/:id').patch(InventryAPI.UpdateInventry);
+router.route('/inventryAPI/:id').delete(InventryAPI.DeleteInventry);
 router.route('/imageUpload').post(ImageUpload.ImageUpload);
 
 // User API
@@ -28,7 +31,6 @@ router.route('/address').post(Address.AddAddress);
 router.route('/address').delete(Address.DeleteAddress);
 router.route('/address').put(Address.UpdateAddress);
 router.route('/clotheAPI').post(clothe.clothe);
-// router.route('/mobileBackcover').get(mobile_backcover.mobile_backcover);
 
 // export routes
 module.exports = router;

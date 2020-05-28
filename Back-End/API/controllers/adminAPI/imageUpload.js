@@ -1,6 +1,6 @@
 const cloudinary = require('cloudinary')
-require('../handlers/cloudinary');
-const upload = require('../handlers/multer');
+require('../../handlers/cloudinary');
+const upload = require('../../handlers/multer');
 module.exports.ImageUpload = async (req, res) => {
     upload(req, res, async (err) => {
         if (err) {

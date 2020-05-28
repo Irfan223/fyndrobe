@@ -3,9 +3,8 @@
 const bcrypt = require('bcrypt');
 const mongoose = require("mongoose");
 const saltRounds = 10;
-const Customer = require('../models/customer');
+const Customer = require('../../models/customer');
 module.exports.CustomerRegister = function (req, res) {
-    req.body.locality = req.body.areaOrstreet = req.body.state = req.body.cityOrDistOrTown = req.body.landmark = req.body.pincode = '';
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
         if (err) {
             throw err;
@@ -28,19 +27,27 @@ module.exports.CustomerRegister = function (req, res) {
             });
             Customer.countDocuments({ email: req.body.email }, function (err1, emailCount) {
                 if (emailCount > 0) {
-                    res.json({ msg: "Your email is already registered with us" });
+                    res.json({ 
+                        code: 4,
+                        msg: "Your email is already registered with us"
+                     });
                 } else {
                     Customer.countDocuments({ mobile: req.body.mobile }, function (err2, mobileCount) {
                         if (mobileCount > 0) {
-                            res.json({ msg: "Your mobile is already registered with us" });
+                            res.json({
+                                code: 3,
+                                 msg: "Your mobile is already registered with us" 
+                                });
                         }
                         newCustomer.save((err, data) => {
                             if (err) {
                                 res.json({
+                                    code: 2,
                                     msg: "We're not able to register, please try after some time"
                                 });
                             } else {
                                 res.json({
+                                    code: 1,
                                     msg: "You're registered successfully"
                                 });
                             }

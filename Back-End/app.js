@@ -15,7 +15,9 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true)
     return next();
 });
-app.use("/api", routes); // a middleware with  mount path
+app.use("/api", routes, function(req, res, next) {
+    res.json('Hello Node Js')
+}); // a middleware with  mount path
 app.use(cors());
 app.use(cookieParser());
 const dbConncect = require('./Config/mongodbConfig'); //connecting to db 
