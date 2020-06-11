@@ -1,0 +1,30 @@
+
+
+.tilehumb {
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid black; */
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tilehumb img {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.tilehumb img:hover {
+  transform: scale(1.1);
+  transition: 1s ease-in-out;
+}
+.tilehumb .htilebtn {
+  position: absolute !important;
+  left: 30px !important;
+  bottom: 10px !important;
+  z-index: 1 !important;
+  text-decoration: none !important;
+  color: white !important;
+  font-size: large !important;
+}

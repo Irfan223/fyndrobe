@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[47],{1312:function(e,n,t){"use strict";t.r(n);var a=t(233),c=t(234),i=t(236),r=t(235),o=t(237),u=t(2),p=t.n(u),s=function(e){function n(){return Object(a.a)(this,n),Object(i.a)(this,Object(r.a)(n).apply(this,arguments))}return Object(o.a)(n,e),Object(c.a)(n,[{key:"render",value:function(){return p.a.createElement("div",{className:"App"},"Invoice View")}}]),n}(u.Component);n.default=s}}]);
+//# sourceMappingURL=47.3d14c488.chunk.js.map

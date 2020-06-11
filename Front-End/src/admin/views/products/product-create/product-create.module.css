@@ -1,0 +1,14 @@
+.textField{
+    width: 100%;
+}
+#addProduct{
+ color: white;
+ font-weight: bolder;
+ height: 50px;
+}
+#addProduct:focus{
+   outline: none;
+   }
+   #submitButton:focus {
+outline: none;
+   }

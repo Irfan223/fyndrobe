@@ -1,0 +1,31 @@
+
+@media only screen and (max-width: 600px) {
+    #body{
+        margin-top: 15%;
+    }
+    #filter{
+        display: none;
+    }
+    .mobile{
+        padding-top: 15px;
+    }
+    #product{
+        padding-left: 7px;
+        padding-right: 7px;
+        padding-bottom: 15px;
+    }
+}
+@media only screen and (min-width: 800px) {
+.mobile{
+    padding-top: 15px;
+    /* padding-left: 15px; */
+}
+#product{
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+}
+#link{
+    color: rgb(99, 95, 95);
+text-decoration: none;
+}

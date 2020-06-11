@@ -1,0 +1,58 @@
+.footer {
+    /* background-image: linear-gradient(
+      110.6deg,
+      rgba(156, 116, 129, 1) -18.3%,
+      rgba(67, 54, 74, 1) 16.4%,
+      rgba(47, 48, 67, 1) 68.2%,
+      rgba(27, 23, 36, 1) 99.1%
+    ); */
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    color: black;
+    width: 100%;
+    height: 700px;
+    border: 1px solid whitesmoke;
+    margin-top: 30px;
+    font-family: "Monda", sans-serif !important;
+  }
+  h5 {
+    color: gainsboro;
+    letter-spacing: 1px;
+    line-height: 38px;
+    font-weight: bold;
+    font-size: 16px;
+    align-items: center;
+    text-transform: uppercase;
+  }
+  .anchor-style {
+    color: springgreen;
+    letter-spacing: 2px;
+    line-height: 35px;
+    /* font-weight: bold; */
+    font-size: 12px;
+    list-style: none;
+    cursor: pointer;
+    align-items: center;
+    text-transform: capitalize;
+  }
+  .anchor-style:hover {
+    text-decoration: none;
+    color: whitesmoke;
+  }
+  .contact input {
+    height: 35px;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    border: none;
+    border-bottom: 2px solid springgreen !important;
+    font-size: 10px;
+  }
+  .contact button {
+    height: 34px;
+    border: none;
+    outline-style: none;
+    align-items: center;
+    background-color: springgreen;
+  }
+  .contact button:hover {
+    opacity: 0.7;
+  }
+  

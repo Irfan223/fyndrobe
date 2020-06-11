@@ -1,0 +1,34 @@
+.header {
+    margin-bottom: -2px;
+}
+.Carousel {
+    padding: 0 !important;
+    margin: 0px 0 0 0 !important ;
+  }
+  
+  .Carousel .CarouselItem {
+    height: 500px;
+  }
+  .CarouselItem img {
+    height: 500px;
+  }
+  .CarouselIndicators li {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 100% !important;
+  }
+  
+  @media (max-width: 32em) {
+    .Carousel .CarouselItem {
+      box-sizing: border-box;
+      width: 34em !important;
+      height: 20em;
+    }
+    .CarouselItem img {
+      width: 34em !important;
+      height: 20em;
+    }
+  }
+  
+  
+  

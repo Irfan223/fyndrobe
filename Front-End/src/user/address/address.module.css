@@ -1,0 +1,21 @@
+.AddressCard{
+  column-count: 2 !important;
+}
+.AddressDetail{
+  background-color: whitesmoke;
+}
+.AddressButton {
+    padding: 78px 90px;
+
+}
+.AddressButton button{
+  background: none;
+  border: none;
+  outline-style: none;
+}
+.editOrRemove{
+  background-color: white;
+  color: grey;
+  padding:3px 15px 3px 15px;
+  border-radius: 5px;
+}
