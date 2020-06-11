@@ -1,42 +1,80 @@
 
 
-const Customer = require('../../models/customer');
+const Address = require('../../models/address');
 // Get Customer Details
-module.exports.GetAddress = function (req, res, next) {
-    Customer.findOne({ email: 'cseirfan17@gmail.com' }, 'address', function (err, user) {
-        if (err) {
-            res.json({ error: err })
-        }
-        res.json({ address: user.address });
-    })
-
+module.exports.GetAddress = async function (req, res, next) {
+  const userId = req.params.userId;
+  try {
+    let address = await Address.findOne({ userId });
+    return res.status(201).send(address)
+  } catch (err) {
+    // console.log(err);
+    res.status(500).send("Something went wrong");
+  }
 }
 // Add Customer Address
-module.exports.AddAddress = function (req, res, next) {
+module.exports.AddAddress = async function (req, res, next) {
+  console.log(req.body);
+  const { userId, addressId, firstName, lastName, mobile, houseAndBuildingName, locality, landmark, pincode, cityOrDistrict, state, country } = req.body;
+  try {
+    let address = await Address.findOne({ userId });
+    if (address) {
+      // checking cart exist
+      let addressItemIndex = address.addresses.findIndex(p => p._id == addressId);
+      if (addressItemIndex > -1) {
+        let addressItem = cart.products[addressItemIndex];
+        addressItem.firstName = firstName;
+        addressItem.lastName = lastName;
+        addressItem.mobile = mobile;
+        addressItem.houseAndBuildingName = houseAndBuildingName;
+        addressItem.locality = locality;
+        addressItem.landmark = landmark;
+        addressItem.pincode = pincode;
+        addressItem.cityOrDistrict = cityOrDistrict;
+        addressItem.state = state;
+        addressItem.country = country;
+        address.addresses[addressItemIndex] = addressItem;
+        address = await address.save();
+        return res.status(200).send(address);
+      } else {
+        address.addresses.push({ addressId, firstName, lastName, mobile, houseAndBuildingName, locality, landmark, pincode, cityOrDistrict, state, country });
+        address = await address.save();
+        return res.status(201).send(address);
+      }
+    } else {
+      //no cart for user, create new cart
+      const newAddress = await Address.create({
+        userId,
+        addresses: [{ firstName, lastName, mobile, houseAndBuildingName, locality, landmark, pincode, cityOrDistrict, state, country }]
+      });
 
+      return res.status(201).send(newAddress);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong");
+  }
 }
 // Delete Customer Address
-module.exports.DeleteAddress = function (req, res, next) {
+module.exports.DeleteAddress = async function (req, res, next) {
+  const { userId } = req.body;
+  try {
+    const address = await Address.findOne ({userId})
+    if(address){
+
+      let removeIndex = address.findIndex(p =>p.id == addressId)
+      console.log(removeIndex)  
+    }
+  
+
+  } catch (error) {
+    console.error(error.message)
+
+  }
+
+
 }
 // Update Customer Details
 module.exports.UpdateAddress = function (req, res, next) {
-    Customer.findOneAndUpdate({ email: req.body.email },
-        {
-            "$set": {
-                'address.locality': req.body.locality,
-                'address.areaOrstreet': req.body.street,
-                'address.cityOrDistOrTown': req.body.city,
-                'address.state': req.body.state,
-                'address.landmark': req.body.landmark,
-                'address.pincode': req.body.pincode
-            }
-        },
-        function (err, doc) {
-            if (err) {
-                console.log("update document error");
-            } else {
-                console.log("update document success");
-                console.log(doc);
-            }
-        });
+
 }

@@ -22,15 +22,12 @@ import {
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
-
 const Widget03 = lazy(() => import('../Widgets/Widget03'));
-
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')
 const brandInfo = getStyle('--info')
 const brandWarning = getStyle('--warning')
 const brandDanger = getStyle('--danger')
-
 // Card Chart 1
 const cardChartData1 = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -464,7 +461,6 @@ class Dashboard extends Component {
       radioSelected: 2,
     };
   }
-
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
@@ -480,7 +476,7 @@ class Dashboard extends Component {
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   render() {
-
+   
     return (
       <div className="animated fadeIn">
         <Row>

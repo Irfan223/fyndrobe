@@ -16,14 +16,6 @@ module.exports.CustomerRegister = function (req, res) {
                 email: req.body.email,
                 mobile: req.body.mobile,
                 password: hash,
-                address: {
-                    locality: req.body.locality,
-                    areaOrstreet: req.body.areaOrstreet,
-                    cityOrDistOrTown: req.body.cityOrDistOrTown,
-                    state: req.body.state,
-                    landmark: req.body.landmark,
-                    pincode: req.body.pincode
-                }
             });
             Customer.countDocuments({ email: req.body.email }, function (err1, emailCount) {
                 if (emailCount > 0) {

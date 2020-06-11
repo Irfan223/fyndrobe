@@ -27,13 +27,19 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 class DefaultLayout extends Component {
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
+   state = {
+     isLoggedIn: localStorage.getItem('userStatus')
+   }
   signOut(e) {
-    e.preventDefault()
-    this.props.history.push('/admin/login')
+    e.preventDefault();
+    localStorage.setItem('userStatus', false);
+    this.props.history.push('/admin/login');
   }
 
   render() {
+    if (this.state.isLoggedIn === 'false') {
+    this.props.history.push('/admin/login');
+    }
     return (
       <div className="app">
         <AppHeader fixed>

@@ -1,7 +1,16 @@
 
-const Product = require('../../models/clothe');
-module.exports.clothe = function (req, res, next) {
-    Product.find({ gender: req.body.gender, category: req.body.category }, function (err, data) {
+const Product = require('../../models/product');
+module.exports.Product = function (req, res, next) {
+    var {gender, productTitle} = req.body;
+    var params = {};
+    if (productTitle == null || undefined) {
+       params = {gender}
+    } else {
+        // console.log(productTitle)
+        productTitle = productTitle.split('-').join(' ');
+        params = {gender, "productTitle": { "$regex": productTitle, "$options": "i" } }
+    }
+    Product.find(params, function (err, data) {
         if (err) {
             res.send(err);
         }

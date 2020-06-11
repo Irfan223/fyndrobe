@@ -1,61 +1,77 @@
-import React, { Component, Suspense } from 'react';
-import baseUrl from '../../axiosConfig';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
-const Header = React.lazy(() => import('../header/header'));
-const Footer = React.lazy(() => import('../footer/footer'));
-// const baseRL = React.lazy(() => import('../baseUrl'));
-
-
-
+import React, { Component } from "react";
+import cssClass from "./home.module.css";
+import Header from "../header/header";
+import Footer from "../footer/footer";
+import { Link } from "react-router-dom";
+import carouseImg1 from "../../assets/images/tshirt.jpg";
+import carouseImg2 from "../../assets/images/tshirt.jpg";
+import carouseImg3 from "../../assets/images/tshirt.jpg";
+import carouseImg4 from "../../assets/images/tshirt.jpg";
+import MenuItem from "../MenuItem/MenuItem";
+import { Carousel } from "antd";
+import axios from "../../axiosConfig";
 class Home extends Component {
+  state = {
+    items: [],
+    isLoaded: true,
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      userEmail: '',
-      userPassword: ''
-    };
-  }
-
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  login = event => {
-    const user = {
-        email: this.state.userEmail,
-        password: this.state.userPassword
-    }
-    event.preventDefault();
-    baseUrl.post('/userLogin', user)
-      .then(function (response) {
-        console.log(response.data)
-        console.log(cookies.getAll())
+  componentDidMount() {
+    axios
+      .get("homeCarousel")
+      .then((res) => {
+        // console.log(res.data);
+        const copyItmes = [];
+        res.data.forEach((item) => {
+          copyItmes.push({
+            title: item.images.title,
+            url: item.images.url,
+            link: item.images.link,
+          });
+        });
+        this.setState(
+          {
+            items: copyItmes,
+          },
+          () => {
+            console.log(this.state.items);
+          }
+        );
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-  signOut(e) {
-    e.preventDefault()
-    this.props.history.push('/admin/login')
-  }
   render() {
-    return (
-      <div className="App">
-        <Suspense fallback={this.loading()}>
-          <Header onLogout={e => this.signOut(e)} />
-        </Suspense>
-        <form onSubmit={this.login}>
-          <input className="inputText" type="email" name="userEmail" value={this.state.userEmail} onChange={this.handleChange} placeholder="Please Enter Email/Phone" required /><br /><br />
-          <input className="inputText" type="password" name="userPassword" value={this.state.userPassword} onChange={this.handleChange} placeholder="Please Enter Password" required />
-          <br /><br /><input type="submit" className="LRButton" value="Login" />
-        </form>
-      </div>
-    );
+    var { isLoaded } = this.state;
+    if (!isLoaded) {
+      return <div>Loading....</div>;
+    } else {
+      return (
+        <React.Fragment className="App">
+          <div className={cssClass.header}>
+            <Header />
+          </div>
+          <div className="body">
+            {/* Start Carousel  */}
+            <div className="">
+            <Carousel autoplay >
+              {this.state.items.map(item => (
+                <Link to={`products/women/${item.link}`}>
+                <img src={item.url} alt={item.title} height="1200px" width="100%"/>
+                </Link>
+              ))}
+            </Carousel>
+            </div>
+              {/* end Carousel  */}
+            <MenuItem />
+          </div>
+          <Footer />
+        </React.Fragment>
+      );
+    }
   }
 }
-
 export default Home;
+
+///////////////////////Styling//////////////////
