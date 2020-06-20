@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
+// Payment API
+const Razorpay = require('../controllers/razorpay/createOrder');
 // Admin js file---
 const Admin            = require('../controllers/adminAPI/adminLogin');
 const AdminSignup     = require('../controllers/adminAPI/adminSignup')
@@ -15,6 +16,8 @@ const Address = require('../controllers/userAPI/Address');
 const Product = require('../controllers/userAPI/productAPI');
 const Cart = require('../controllers/userAPI/cart');
 const ProductDetails = require('../controllers/userAPI/productDetails');
+// payment 
+router.route('/razorpay').post(Razorpay.razorpay);
 // Admin API--
 router.route('/adminLogin').post(Admin.Admin);
 router.route('/adminRegister').post(AdminSignup.AdminSignup);

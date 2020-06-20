@@ -1,72 +1,69 @@
-.ImageDiv{
+.ImageDiv {
   height: 100%;
 }
-.ImageDiv img{
- width: 120px;
-  height: 150px
+.ImageDiv img {
+  width: 120px;
+  height: 150px;
 }
-.Select{
+.Select {
   width: 70px;
   height: 30px;
   border-radius: 5px;
   padding: 2px;
-  background:none;
+  background: none;
   outline-style: none;
 }
-.RemoveButton{
+.RemoveButton {
   position: absolute;
   bottom: 10px;
   left: 0;
   padding: 0;
 }
-.RemoveButton button{
+.RemoveButton button {
   width: 120px;
-  padding:5px 30px;
+  padding: 5px 30px;
   text-transform: capitalize !important;
   border-radius: 5px;
 }
-.RemoveModal{
+.RemoveModal {
   position: absolute;
   background-color: white;
   width: 400px;
   height: 170px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 5px;
 }
-.yes{
+.yes {
   border: none;
   border-radius: 5px;
   width: 70px;
-  background-color:whitesmoke;
+  background-color: whitesmoke;
   color: grey;
   font-weight: 400;
   position: absolute;
   right: 10px;
-
 }
 .yes:hover {
-  background-color:darkred;
+  background-color: darkred;
   color: white;
 }
-.no{
- border: none;
- background-color:darkred;
- color: white;
- width: 70px;
- border-radius: 5px;
- font-weight: 400;
- position: absolute;
+.no {
+  border: none;
+  background-color: darkred;
+  color: white;
+  width: 70px;
+  border-radius: 5px;
+  font-weight: 400;
+  position: absolute;
 }
-
 
 .emptyCart {
   text-align: center;
-  /* border: 1px solid gray; */
-  
+  margin-top: 150px;
 }
-.emptyCart p{
+.emptyCart p {
   margin-left: 20px;
 }
 .emptyCart img {
@@ -75,40 +72,47 @@
   margin-right: auto;
   width: 30%;
 }
-.ContinueShoppingButton{
-  width: 120px;
+.ContinueShoppingButton {
+  /* width: 120px;
   height: 35px;
   background: orange;
-  border: none;
+  border: none; */
   color: white;
   padding: 15px;
   border-radius: 5px;
+  text-decoration: none !important;
+  opacity: 0.7;
+  transition: 1s ease-in-out;
+  cursor: pointer;
 }
-@media(max-width:34em){
-  .ImageDiv img{
+.ContinueShoppingButton:hover {
+  opacity: 1;
+  color: white;
+}
+@media (max-width: 34em) {
+  .ImageDiv img {
     width: 100px;
     height: 135px;
   }
-  .ProductTitle{
-
+  .ProductTitle {
     margin-left: 15px;
   }
-  .selectSection{
+  .selectSection {
     margin-top: 10px;
     margin-left: 13px;
   }
-  .QuantityPrice{
+  .QuantityPrice {
     position: absolute;
     top: 20px;
     margin-top: 10px;
     margin-left: 32px;
   }
-  .RemoveButton{
+  .RemoveButton {
     position: absolute;
     top: 110px;
     margin-left: 7px;
   }
-  .RemoveButton button{
+  .RemoveButton button {
     height: 30px;
     /* width: 60px; */
     padding: 0px !important;
@@ -116,28 +120,23 @@
     border: none !important;
     /* background-color: transparent; */
   }
-  .Select{
+  .Select {
     width: 50px;
     height: 30px;
     border-radius: 2px;
     padding: 2px;
   }
-  .RemoveModal{
+  .RemoveModal {
     width: 100%;
     /* margin: 0 5px; */
   }
-  .no{
+  .no {
     position: absolute !important;
     margin-bottom: 10px !important;
-    
   }
-  .yes{
+  .yes {
     position: absolute !important;
     margin-left: 65px !important;
     margin-bottom: 10px !important;
-    
-   
   }
-  
-
 }

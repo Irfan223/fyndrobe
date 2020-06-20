@@ -86,7 +86,7 @@ class AddressModal extends Component {
   };
   render() {
     const { isOpen, onRequestClose, id } = this.props;
-    alert(id);
+    // alert(id);
 
     return (
       <div>
@@ -265,7 +265,9 @@ class AddressModal extends Component {
                   </div>
                 </div>
 
-                <div className="d-flex justify-content-start ml-3">
+                <div
+                  className={`d-flex justify-content-start ml-3 ${cssClass.SaveCancelButton}`}
+                >
                   <div className="">
                     <Form.Item>
                       <Button

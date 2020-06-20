@@ -1,23 +1,47 @@
-.login {
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid lightcoral;
-    background-color: lightcoral;
-    color: white;
-}
-.register {
+@media (max-width: 34em) {
+    .FacebookGoogle {
+      margin-top: 50px !important;
+    }
+    .FormContainer {
+      padding-bottom: 50px !important;
+    }
+    .Or {
+      margin-top: 50px !important;
+      margin-left: 10px !important;
+    }
+    .Form {
+      margin-left: 10px;
+    }
+    .LoginButton {
+      position: absolute;
+      top: 0% !important;
+      margin-left: -10px !important;
+    }
+    .SignUp {
+      position: absolute;
+      margin-top: 20px;
+      margin-bottom: 40px !important;
+      padding-bottom: 10px !important;
+      /* top: 70% !important; */
+    }
+    .SignUp div {
+      margin: 0 50px 0 10px !important;
+    }
+  }
+  
+  /* .register {
     width: 100%;
     padding: 10px;
     text-align: center;
     color: rgb(112, 107, 107);
     border: 1px solid rgb(216, 212, 212);
     background-color: whitesmoke;
-}
-button:focus{
+  } */
+  button:focus {
     outline: none;
-}
-Link:hover{
+  }
+  Link:hover {
     color: white;
     text-decoration: none;
-}
+  }
+  

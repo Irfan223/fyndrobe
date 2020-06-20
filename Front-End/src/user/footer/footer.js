@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import cssClass from "./footer.module.css";
-// import logo from "../../assets/images/Flogo.png";
+import logo from "../../assets/images/Flogo.png";
 import {
   FaFacebookSquare,
   FaInstagram,
@@ -9,19 +9,19 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import { GiReturnArrow } from "react-icons/gi";
-// import googleplay from "../../assets/images/google-play-badge.png";
-// import appstore from "../../assets/images/App-Store-Badge.svg";
+import googleplay from "../../assets/images/google-play-badge.png";
+import appstore from "../../assets/images/App-Store-Badge.svg";
 import visa from "../../assets/images/Visa.png";
 import maestro from "../../assets/images/Maestro.png";
 import mastercard from "../../assets/images/MasterCard.png";
 import paypal from "../../assets/images/Paypal.png";
-// import cirrus from "../../assets/images/Cirrus.png";
+import cirrus from "../../assets/images/Cirrus.png";
 class Footer extends Component {
   render() {
     return (
       <div className={`container-fluid ${cssClass.Footer}`}>
         <div className="mx-5 my-5 align-items-center logo">
-          {/* <img
+          <img
             src={logo}
             alt="logo"
             style={{
@@ -30,7 +30,7 @@ class Footer extends Component {
               borderRadius: "100%",
               background: "whitesmoke",
             }}
-          /> */}
+          />
         </div>
         {/* Link as in the footer */}
         <div className="container">
@@ -84,7 +84,9 @@ class Footer extends Component {
             {/* End first column */}
             <div className="col-6 col-md-3 col-xs-6">
               <div className={cssClass.FooterLinks}>
-                <h5 className="font-weight-bold text-uppercase ml-3 fred ">
+                <h5
+                  className={`font-weight-bold text-uppercase ml-3  ${cssClass.Fred}`}
+                >
                   Company
                 </h5>
                 <ul className=" nav flex-column ">
@@ -128,7 +130,9 @@ class Footer extends Component {
               className={`col-6 col-md-3 col-xs-6 ${cssClass.ConnectWithUs}`}
             >
               <div className={cssClass.FooterLinks}>
-                <h5 className="font-weight-bold text-uppercase ml-3 fred">
+                <h5
+                  className={`font-weight-bold text-uppercase ml-3 ${cssClass.Fred}`}
+                >
                   Connect With Us
                 </h5>
                 <ul className={`nav d-flex  ${cssClass.ConnectWithUs}`}>
@@ -182,15 +186,17 @@ class Footer extends Component {
 
             <div className={`col-6 col-md-3 col-xs-6 ${cssClass.KeeUpToDate}`}>
               <div className={cssClass.FooterLinks}>
-                <h5 className={`ml-3 ${cssClass.Fred}`}>Keep Up to date</h5>
+                <h5 className={`ml-3 text-uppercase ${cssClass.Fred}`}>
+                  Keep Up to date
+                </h5>
                 <form className={cssClass.Contact}>
                   <input
-                    class="form-control form-control-md  ml-3"
+                    className="form-control form-control-md  ml-3"
                     type="text"
                     placeholder="Enter Email Id"
                   />
 
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" className="btn btn-primary">
                     Submit
                   </button>
                 </form>
@@ -235,14 +241,14 @@ class Footer extends Component {
                       href="https://play.google.com/store?hl=en"
                       className={`nav-link ${cssClass.NavLink}`}
                     ></a>
-                    {/* <img src={appstore} alt="Google Play" /> */}
+                    <img src={appstore} alt="Google Play" />
                   </li>
                   <li className={`nav-item ${cssClass.NavItem}`}>
                     <a
                       href="https://www.apple.com/ios/app-store/"
                       className={`nav-link ${cssClass.NavLink}`}
                     ></a>
-                    {/* <img src={appstore} alt="App Store" /> */}
+                    <img src={appstore} alt="App Store" />
                   </li>
                 </ul>
               </div>
@@ -250,7 +256,7 @@ class Footer extends Component {
             {/* End of second column */}
             <div className="col-6 col-md-3 col-xs-6 ml-2">
               <div className={cssClass.FooterLinks}>
-                <h5 className="fred">100% Secure Payment</h5>
+                <h5 className={cssClass.Fred}>100% Secure Payment</h5>
                 <div className="d-flex">
                   <img
                     src={visa}
@@ -272,11 +278,11 @@ class Footer extends Component {
                     alt="paypal"
                     style={{ width: "20%", height: "20%" }}
                   />
-                  {/* <img
+                  <img
                     src={cirrus}
                     alt="cirrus"
                     style={{ width: "20%", height: "20%" }}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>
@@ -288,12 +294,3 @@ class Footer extends Component {
 }
 
 export default Footer;
-
-
-
-
-
-
-////////////////////////Styling///////////////////////
-
-

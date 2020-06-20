@@ -3,7 +3,7 @@
   padding: 0 !important;
   margin-bottom: 5px;
 }
-.category{
+.category {
   margin-right: 250px;
 }
 .Navbar .NavItem {
@@ -15,8 +15,8 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-.NavItem:hover .IsActive{
-  border-bottom:solid 4px orange;
+.NavItem:hover .IsActive {
+  border-bottom: solid 4px orange;
   background-color: whitesmoke !important;
 }
 
@@ -93,30 +93,45 @@
 }
 .SearchBar {
   height: 100% !important;
-  border-radius: 5px !important;
-  border: 1px solid whitesmoke !important;
   background-color: whitesmoke;
-  margin-right: 20px;
+  border: 1px solid whitesmoke;
+  border-radius: 3px;
 }
-/* Search bar */
-.SearchBar i {
-  font-size: 20px;
-  padding: 10px;
-  height: 40px;
-  float: right;
-  /* border-left: 2px solid whitesmoke; */
-  cursor: pointer;
-}
+
 /* Search bar */
 .SearchBar input {
   width: 260px !important;
-  height: 40px !important;
-  border: none;
+  height: 37px !important;
+  border: none !important;
   background-color: whitesmoke !important;
   padding-left: 12px !important;
+  font-size: small;
 }
-.SearchBar input:focus {
-  box-shadow: none;
+input[type="search"]:focus {
+  background-color: white !important;
+}
+
+.SearchBar:focus-within {
+  background-color: white !important;
+}
+.cartItem {
+  position: absolute;
+  top: 5px !important;
+  right: 5px !important;
+}
+
+.circle {
+  /* height: 15px !important;
+  width: 15px !important; */
+  padding: 2px 5px 2px 5px;
+  border-radius: 50%;
+  color: white;
+  font-size: 10px !important;
+  font-weight: bolder;
+  background-color: rgb(226, 7, 7);
+}
+.MobileSearch {
+  display: none;
 }
 
 /* Mobile view */
@@ -143,10 +158,10 @@
   .NavItem:focus {
     border-bottom: 1px solid whitesmoke !important;
   }
-  .tooglerBarButton{
+  .tooglerBarButton {
     border: none;
   }
-  .tooglerBarButton:focus{
+  .tooglerBarButton:focus {
     outline: none;
   }
   .FaTimes {
@@ -168,7 +183,6 @@
     flex-direction: column;
   }
   .DropdownMenu {
-    /* column-count: 1 !important; */
     border: none !important;
     margin-left: 30px;
     background-color: whitesmoke !important;
@@ -180,8 +194,6 @@
     margin: auto !important;
   }
   .SignInCart .NavItem {
-    /* font-size: 14px !important; */
-    /* outline-style: none !important; */
     margin: 0 !important;
   }
 
@@ -195,35 +207,39 @@
     border: none;
   }
   .SearchBar {
-    border: none !important;
-    border-radius: 5px !important;
-  }
-  .SearchBar i {
-    border-left: none !important;
-    padding: 0;
-
-    margin-top: 22px;
-    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
   }
   .SearchBar input {
-    position: absolute;
     display: none;
-    width: 40px;
-    margin-right: 10px;
   }
-}
-.cartItem{
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-.circle{
-  /* height: 15px !important;
-  width: 15px !important; */
-  padding: 2px 5px 2px 5px;
-  border-radius: 50%;
-  color: white;
-  font-size: 10px !important;
-  font-weight: bolder;
-  background-color: rgb(226, 7, 7);
+  .MobileSearch {
+    display: flex;
+    align-items: center;
+    font-size: 12px !important;
+    height: 50px;
+    background-color: white !important;
+    position: absolute;
+    right: 0 !important;
+    z-index: 1;
+  }
+
+  .MobileSearch i {
+    padding: 0 10px;
+  }
+
+  .MobileSearch input {
+    padding: 0 20px;
+    height: 100% !important;
+    background-color: white !important;
+    border: none;
+  }
+  .cartItem {
+    position: absolute;
+    top: -5px !important;
+    right: 0 !important;
+  }
 }

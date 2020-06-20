@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import customStyle from "./login.module.css";
 import axios from "../../axiosConfig";
-import { Formik } from "formik";
+import customStyle from "./login.module.css";
+import { Form, Input, Button } from "antd";
+import {
+  FacebookFilled,
+  FacebookOutlined,
+  LockOutlined,
+  MailOutlined,
+  GoogleOutlined,
+} from "@ant-design/icons";
 import * as Yup from "yup";
 const Header = React.lazy(() => import("../header/header"));
 const Footer = React.lazy(() => import("../footer/footer"));
@@ -22,15 +28,20 @@ class Login extends Component {
       [event.target.name]: event.target.value,
     });
   };
-  login = (values, history) => {
-    //   alert(this.state.email + ' ' +this.state.password)
-    // event.preventDefault();
+   login = (values) => {
+    // alert(this.state.email + " " + this.state.password);
     // const params = {
     //   email: this.state.email,
     //   password: this.state.password,
     // };
+    this.setState({
+      email: values.email,
+      password: values.password,
+    });
+    console.log(values);
+
     axios
-      .post("userLogin", values)
+      .post("userLogin", this.state)
       .then((res) => {
         console.log(res.data["code"]);
         if (res.data["code"] === 1) {
@@ -53,124 +64,142 @@ class Login extends Component {
         <div className="body">
           <div className="container-fluid mt-5">
             <div className="row justify-content-center">
-              <div className="col-12 col-sm-4 p-5 border rounded">
-                <h4 className="text-center">Login with Fashion Focus</h4>
-                <div className="row no-gutters mb-3 mt-3">
-                  <div className="col-sm-6">
-                    <Link>
-                      <button className={customStyle.login}>LOGIN</button>
-                    </Link>
-                  </div>
-                  <div className="col-sm-6">
-                    <Link to="/register">
-                      <button className={customStyle.register}>REGISTER</button>
-                    </Link>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-6">
-                    <button className="btn btn-facebook w-100" type="button">
-                      <span>facebook</span>
-                    </button>
-                  </div>
-                  <div className="col-sm-6">
-                    <button className="btn btn-google-plus w-100" type="button">
-                      <span>Google</span>
-                    </button>
-                  </div>
-                </div>
-                <div className="row no-gutters mt-3">
-                  <div className="col-sm-5">
-                    <hr />
-                  </div>
-                  <div className="col-sm-2 text-center">OR</div>
-                  <div className="col-sm-5">
-                    <hr />
-                  </div>
-                </div>
-                <Formik
-                  initialValues={{ email: "", password: "" }}
-                  onSubmit={(values, { setSubmitting }) => {
-                    console.log(values);
-
-                    this.login(values, this.props.history);
-                    setSubmitting(false);
-                  }}
-                  validationSchema={Yup.object().shape({
-                    email: Yup.string().email().required("Email is required"),
-                    password: Yup.string()
-                      .required("Password is required")
-                      .min(5, "Passwod is too short should be 6 character long")
-                      .matches(
-                        /(?=.*[0-9])/,
-                        "Password should contain a number"
-                      ),
-                  })}
+            <div className="col-md-4 col-sm-4 col-12 ">
+                <div
+                  className={`p-5 border rounded ${customStyle.FormContainer}`}
                 >
-                  {(props) => {
-                    const {
-                      values,
-                      errors,
-                      touched,
-                      handleChange,
-                      handleBlur,
-                      handleSubmit,
-                      isSubmitting,
-                    } = props;
-
-                    return (
-                      <form onSubmit={handleSubmit}>
-                        <InputField
-                          name="email"
-                          label="Email"
-                          value={values.email}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          className={errors.email && touched.email}
-                        />
-                        {errors.email && touched.email && (
-                          <div className="text-red">{errors.email}</div>
-                        )}
-
-                        <InputField
-                          name="password"
-                          label="Password"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.password}
-                          className={errors.password && touched.password}
-                        />
-                        {errors.password && touched.password && (
-                          <div className="text-red">{errors.password}</div>
-                        )}
+                  <div className="row">
+                    <div className="col md-12 col-sm-12 col-12">
+                      <h4 className="text-center">Login with FyndRobe</h4>
+                    </div>
+                  </div>
+                  <div className="row no-gutters my-3">
+                    <div className="col-md-6 col-sm-6 col-6">
+                      <Link to="/login">
+                        <Button block type="primary">
+                          LOGIN
+                        </Button>
+                      </Link>
+                    </div>
+                    <div className="col-md-6 col-sm-6 col-6">
+                      <Link to="/register">
+                        <Button block type="default">
+                          REGISTER
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                  <div
+                    className={`row no-gutters mt-4 ${customStyle.FacebookGoogle}`}
+                  >
+                    <div className=" col-md-6 col-sm-6 col-6">
+                      <a href="http://www.facebook.com">
                         <Button
-                          type="submit"
-                          disabled={isSubmitting}
-                          variant="contained"
-                          color="primary"
-                          className="mt-3 p-2 w-100"
+                          block
+                          style={{
+                            background: "#3b5998 ",
+                            color: "white",
+                            outline: "none",
+                          }}
+                          icon={<FacebookFilled />}
+                        >
+                          facebook
+                        </Button>
+                      </a>
+                    </div>
+                    <div className="col-md-6 col-sm-6 col-6">
+                      <a href="http://www.google.com">
+                        <Button
+                          block
+                          // shape="round"
+                          icon={<GoogleOutlined />}
+                          style={{
+                            background: "#db3236 ",
+                            color: "white",
+                            outline: "none",
+                          }}
+                        >
+                          Google
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                  <div className={`row no-gutters mt-2 ${customStyle.Or}`}>
+                    <div className=" col-md-5 col-sm-5 col-5 ">
+                      <hr />
+                    </div>
+                    <div className="col-md-2 col-sm-2 col-2 text-center">
+                      OR
+                    </div>
+                    <div className="col-md-5 col-sm-5 col-5 ">
+                      <hr />
+                    </div>
+                  </div>
+                  <Form
+                    name="nest-message"
+                    onFinish={this.login}
+                    className={customStyle.Form}
+                  >
+                    <div className={`row no-gutters `}>
+                      <div className="col-md-12 col-sm-12 col-12">
+                        <Form.Item
+                          name="email"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Email is required!",
+                            },
+                          ]}
+                        >
+                          <Input
+                            prefix={
+                              <MailOutlined className="site-form-item-icon" />
+                            }
+                            placeholder="Email"
+                          />
+                        </Form.Item>
+                      </div>
+                      <div className="col-md-12 col-sm-12 col-12">
+                        <Form.Item
+                          name="password"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Password is required!",
+                            },
+                          ]}
+                        >
+                          <Input.Password
+                            prefix={
+                              <LockOutlined className="site-form-item-icon" />
+                            }
+                            type="password"
+                            placeholder="Password"
+                          />
+                        </Form.Item>
+                      </div>
+                      <div className="col-md-12 col-sm-12 col-12 mb-4">
+                        <Button
+                          type="primary"
+                          block
+                          htmlType="submit"
+                          className={customStyle.LoginButton}
                         >
                           Login
                         </Button>
-                      </form>
-                    );
-                  }}
-                </Formik>
-                <div className="row mt-3">
-                  <div className="col-6 col-sm-6">
-                    New to here ,&nbsp;
-                    <Link to="/register" variant="contained" color="primary">
-                      Sign Up
-                    </Link>
-                  </div>
-                  <div className="col-6 col-sm-6">
-                    <Link
-                      className="float-right"
-                      variant="contained"
-                      color="primary"
-                    >
-                      Forgot Password
-                    </Link>
+                      </div>
+                    </div>
+                  </Form>
+
+                  <div
+                    className={`d-flex justify-content-between ${customStyle.SignUp}`}
+                  >
+                    <div className="">
+                      <Link to="/register">SignUp</Link>
+                    </div>
+                    <div className="">
+                      <Link to="">Forgot password</Link>
+                    </div>
                   </div>
                 </div>
               </div>

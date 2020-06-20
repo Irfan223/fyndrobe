@@ -1,0 +1,32 @@
+.BrandName {
+    background-color: whitesmoke;
+    height: 150px;
+    align-items: center;
+  }
+  
+  @media (max-width: 34em) {
+    .orderDetailsButton {
+      position: relative !important;
+    }
+    .ShoppingDetails {
+      display: flex;
+      flex-direction: column !important;
+    }
+    .ShoppingDetails div {
+      margin: 20px 0;
+    }
+    .ShoppingDetails h5 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .ShoppingDetails p {
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+    .Thanksmessage h3,
+    h4 {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  

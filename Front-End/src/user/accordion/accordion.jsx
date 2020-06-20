@@ -33,16 +33,16 @@ class AccordionComponent extends Component {
           </Panel>
           <Panel header="WOMENS" key="2">
             <div>
-              <Link to="/products/women/Kurta" className={customStyle.linkStyle}>Dupattas and Shawls</Link>
+              <Link to="/products/women/Kurta" className={customStyle.linkStyle}>Kurtas</Link>
             </div>
             <div>
-              <Link to="/products/women/Kurta" className={customStyle.linkStyle}>Dupattas and Shawls</Link>
+              <Link to="/products/women/Kurta-with-leggins" className={customStyle.linkStyle}>Kurta-with-leggins</Link>
             </div>
             <div>
-              <Link to="/products/women/Kurta" className={customStyle.linkStyle}>Dupattas and Shawls</Link>
+              <Link to="/products/women/Kurta-with-dupatta" className={customStyle.linkStyle}>Kurta-with-dupatta</Link>
             </div>
             <div>
-              <Link to="/products/women/Kurta" className={customStyle.linkStyle}>Dupattas and Shawls</Link>
+              <Link to="/products/women/Dupattas-and-Shawls" className={customStyle.linkStyle}>Dupattas and Shawls</Link>
             </div>
           </Panel>
           <Panel header="KIDS" key="3">

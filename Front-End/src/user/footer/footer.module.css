@@ -1,82 +1,80 @@
-
 .Footer {
-    padding-top: 20px;
-    margin-top: 50px;
-    background-color: #e6e7e8;
+  background-color: #e6e7e8;
+}
+
+.Footer .FooterLinks .Fred {
+  color: orange;
+  font-size: 16px !important;
+}
+
+.Footer .NavItem .NavLink {
+  color: rgba(0, 0, 0, 0.5) !important;
+  text-transform: capitalize !important;
+  font-size: 14px;
+  /* opacity: 1 !important; */
+}
+.NavItem .NavLink:hover {
+  color: rgba(orange, 0.5) !important;
+}
+
+.Footer .Contact {
+  display: flex !important;
+}
+
+.Contact input {
+  height: 40px;
+  border-bottom: 2px solid orange !important;
+  border: none;
+  width: 120px;
+  background-color: #e6e7e8 !important;
+  border-radius: 0 !important;
+  outline-style: none !important;
+}
+.Contact button {
+  width: 120px;
+  height: 40px;
+  border-radius: 0 !important;
+  background-color: orange;
+  outline-style: none !important;
+  border: none !important;
+  margin: 0 !important;
+  text-align: center;
+}
+
+.FooterInformation p {
+  font-size: 14px;
+  text-transform: capitalize;
+  margin-left: 5px;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.StoreButton li {
+  cursor: pointer;
+}
+
+@media (max-width: 34em) {
+  .Footer {
+    /* margin-bottom: 50px;
+    padding-bottom: 20px; */
+    /* display: none; */
   }
-  
   .Footer .FooterLinks .Fred {
-    color: orange;
-    font-size: 16px !important;
+    font-size: 12px !important;
   }
-  
+
   .Footer .NavItem .NavLink {
-    color: rgba(0, 0, 0, 0.5) !important;
-    text-transform: capitalize !important;
-    font-size: 14px;
-    /* opacity: 1 !important; */
+    font-size: 10px !important;
   }
-  .NavItem .NavLink:hover {
-    color: rgba(orange, 0.5) !important;
+
+  .Footer .KeeUpToDate {
+    display: none !important;
   }
-  
-  .Footer .Contact {
+  .Footer .ConnectWithUs {
     display: flex !important;
+    flex-flow: row !important;
   }
-  
-  .Contact input {
-    height: 40px;
-    border-bottom: 2px solid orange !important;
-    border: none;
-    width: 120px;
-    background-color: #e6e7e8 !important;
-    border-radius: 0 !important;
-    outline-style: none !important;
-  }
-  .Contact button {
-    width: 120px;
-    height: 40px;
-    border-radius: 0 !important;
-    background-color: orange;
-    outline-style: none !important;
-    border: none !important;
+  .ConnectWithUs .NavItem .NavLink {
     margin: 0 !important;
-    text-align: center;
   }
-  
-  .FooterInformation p {
-    font-size: 14px;
-    text-transform: capitalize;
-    margin-left: 5px;
-    align-items: center;
-    color: rgba(0, 0, 0, 0.5) !important;
-  }
-  
-  .StoreButton li {
-    cursor: pointer;
-  }
-  
-  @media (max-width: 34em) {
-    .Footer .FooterLinks .Fred {
-      font-size: 12px !important;
-    }
-  
-    .Footer .NavItem .NavLink {
-      font-size: 10px !important;
-    }
-  
-    .Footer .KeeUpToDate {
-      display: none !important;
-    }
-    .Footer .ConnectWithUs {
-      display: flex !important;
-      flex-flow: row !important;
-    }
-    .ConnectWithUs .NavItem .NavLink {
-      margin: 0 !important;
-    }
-  }
-  
-  
-  
-  
+}

@@ -290,7 +290,7 @@ class ProductList extends Component {
                                         ))}
                                     </div>
                                 </div>
-                                <Pagination count={10} size="small" />
+                                {/* <Pagination count={10} size="small" /> */}
                             </div>
                         </div>
                     </div>

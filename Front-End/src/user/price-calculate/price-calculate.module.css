@@ -1,65 +1,66 @@
-.coupon{
-    padding: 10px 15px 10px 15px;
-}
-.inputText{
-/* margin-right: 10px; */
-padding: 5px;
-text-indent: 5px;
-border: 1px solid orange;
-border-radius: 5px;
-}
-.submitButton{
-   padding: 5px;
-   /* width: 100%; */
-   border: 1px solid orange;
-   background-color: orange;
-   border-radius: 5px;
-   font-weight: 500;
-   color: white;
-   /* margin-left: 60px; */
-}
-.submitButton:hover{
-    background-color: rgb(235, 154, 5);
-}
-.submitButton:focus{
+.coupon {
+    /* padding: 10px 15px 10px 15px; */
+    /* width: 360px; */
+  }
+  .FormItem {
+    width: 150px;
+  }
+  .inputText {
+    border: 1px solid#FE4066;
+  }
+  .submitButton {
+    /* border: 1px solid orange; */
+    background-color: #fe4066;
+    font-weight: 500;
+    color: white;
+    width: 100px;
+    outline: none !important;
+  }
+  .submitButton:hover {
+    background-color: #fe4066;
+    color: white;
+  }
+  .submitButton:focus {
     outline: none;
-}
-.placeOrder button{
+    border: none !important;
+  }
+  .placeOrder button {
     border: none;
-    background-color: orange;
+    background-color: #fe4066;
     border-radius: 5px;
     color: white;
     font-weight: 500;
     width: 100%;
     margin-top: 10px;
     padding: 10px;
-}
-.placeOrder button:hover{
-    background-color: rgb(235, 154, 5);
-}
-.placeOrder button:focus{
+  }
+  .placeOrder button:hover {
+    background-color: #fe4066;
+  }
+  .placeOrder button:focus {
     outline: none;
-}
-@media only screen and (max-width: 520px) {
-
-    .placeOrder{
-        margin:0 0 40px 0 !important ;
+  }
+  @media only screen and (max-width: 520px) {
+    .placeOrder {
+      margin: 0 0 40px 30px !important ;
     }
-    .placeOrder button{
-    position: absolute;
-       width: 18em !important;
+    .placeOrder button {
+      position: absolute !important;
+      width: 94% !important;
     }
-    .priceTotal{
-        display: flex !important;
-        justify-content: space-between !important;
+    .priceTotal {
+      display: flex !important;
+      justify-content: space-between !important;
     }
-    /* .submitButton{
-        width: 80px;
+    .submitButtonContainer {
+      position: relative;
+      bottom: 10px !important;
     }
-    .inputText{
-        margin-right: 5px;
-        width: 65%;
-        height: 40px;
-    } */
-
-}
+    .FormItem {
+      width: 200px;
+    }
+    .submitButton {
+      width: 70px;
+    }
+  }
+  

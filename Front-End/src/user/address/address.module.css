@@ -1,21 +1,58 @@
-.AddressCard{
+.AddressCard {
   column-count: 2 !important;
+  margin: 0 5px 5px 0px !important;
 }
-.AddressDetail{
+.Card {
+  width: 300px !important;
+  margin: 0px  8px 0 0 !important;
+}
+.AddressDetails {
+  line-height: 25px;
+  /* color: rgba(0, 0, 0, 0, 1); */
+}
+.AddressDetail {
   background-color: whitesmoke;
 }
 .AddressButton {
-    padding: 78px 90px;
-
+  padding: 78px 90px;
 }
-.AddressButton button{
+.AddressButton button {
   background: none;
   border: none;
   outline-style: none;
 }
-.editOrRemove{
+.editOrRemove {
   background-color: white;
   color: grey;
-  padding:3px 15px 3px 15px;
+  padding: 3px 15px 3px 15px;
   border-radius: 5px;
+}
+.PlusSign {
+  font-size: 40px;
+  margin-top: 85px;
+  display: flex;
+  justify-content: center;
+}
+.PlusSignText {
+  margin-top: 10px;
+  font-size: 16px;
+  margin-left: 67px;
+}
+@media (max-width: 34em) {
+  .AddressCard {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 0 0px 0px 5px !important; */
+  }
+  .Card {
+    margin: 0px  0px 8px 0px !important;
+
+    width: 350px !important;
+  }
+  .AddNewAddressOption{
+
+    margin-left: 12px !important;
+
+  }
 }

@@ -5,3 +5,58 @@
   border: none;
   box-shadow: 5px 2px 3px 2px whitesmoke;
 }
+
+.CreditCardSection{
+  padding: 0 0px 0 150px;
+}
+.Collapse{
+  width: 500px;
+}
+.paymentBody{
+  padding: 0px 100px 0px 100px;
+  
+}
+.tabPane{
+  padding: 15px;
+  font-weight: bold;
+  
+}
+.tabPane:focus{
+  outline: none;
+  
+}
+.selectDropdown{
+  padding: 8px 0px;
+  width: 100%;
+  /* border: 1px solid rgb(221, 215, 215); */
+}
+.selectDropdown:focus{
+  outline: none;
+}
+
+@media(max-width:34em){
+ 
+  /* .PaymentForm button{
+    position:  relative !important;
+    padding-left: 0px;
+    
+  } */
+  .payButton{
+    position:  relative !important;
+   margin-left: -10px;
+   padding: 0;
+  }
+  .tabPane{
+    /* margin-top: 500px !important; */
+    position: absolute !important ;
+  } 
+  .Collapse{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .CreditCardSection{
+    padding:15px 15px !important;
+
+  }
+}

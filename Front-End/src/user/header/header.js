@@ -6,6 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "../../axiosConfig";
 import Cookies from "universal-cookie";
 import { withRouter } from "react-router";
+import logo from '../../assets/images/FyndrobeLogo.png';
 const Drawer = React.lazy(() => import("../Drawer/drawer"));
 const cookies = new Cookies();
 class Header extends Component {
@@ -128,7 +129,7 @@ class Header extends Component {
           className={`navbar shadow-sm   navbar-expand-lg navbar-light bg-light fixed-top ${cssClass.Navbar}`}
         >
           <a className={`navbar-brand ${cssClass.NavbarBrand}`} href="/">
-            Fashion Focus
+           <img src={logo} width="170px" />
           </a>
           {/* Start Mobile View Navigation */}
           <div className="d-block d-sm-none">
@@ -215,7 +216,8 @@ class Header extends Component {
                     to="/products/women/Kurta"
                     className={`dropdown-item ${cssClass.DropdownItem}`}
                   >
-                    Dupattas and Shawls
+                    Kurtas
+                   
                   </Link>
 
                   <Link
@@ -236,7 +238,7 @@ class Header extends Component {
                     to="/products/women/Dupattas-and-Shawls"
                     className={`dropdown-item ${cssClass.DropdownItem}`}
                   >
-                    Kurtas
+                     Dupattas and Shawls
                   </Link>
                 </div>
               </li>
@@ -377,18 +379,49 @@ class Header extends Component {
               </li>
             </ul>
           </div>
-          <form className={`form-inline my-2 my-lg-0 ${cssClass.SignInCart}`}>
-            <div className={`${cssClass.SearchBar}`}>
+          <div className={`d-flex align-items-center  ${cssClass.SignInCart}`}>
+            <div
+              className={`d-flex flex-row-reverse align-items-center ${cssClass.SearchBar}`}
+            >
               <span>
-                <i onClick={() => alert("Hello")} className="fa fa-search"></i>
+                <i
+                  onClick={() =>
+                    this.setState({ SearchBar: !this.state.SearchBar })
+                  }
+                  className="fa fa-search float-right px-2"
+                />
               </span>
               <input
-                className="form-control "
+                className="form-control  shadow-none"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
             </div>
+            {/* start For mobile */}
+            <div
+              className={cssClass.MobileSearch}
+              style={
+                this.state.SearchBar
+                  ? { display: "translateY(0%)" }
+                  : { transform: "translateY(-150%)" }
+              }
+            >
+              <span onClick={() => this.setState({ SearchBar: false })}>
+                <i className="fa fa-arrow-left"></i>{" "}
+              </span>
+              <input
+                className="form-control  shadow-none"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                style={{ width: window.innerWidth - 80 }}
+              />
+              <span>
+                <i className="fa fa-search"></i>
+              </span>
+            </div>
+            {/*end For mobile */}
 
             <div className="d-none d-sm-block">
               <ul className="navbar-nav mr-auto ">
@@ -412,7 +445,7 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="">
               <li className={`nav-item ${cssClass.NavItem}`}>
                 <Link to="/cart" className={`nav-link ${cssClass.NavLink}`}>
                   <span className="fa fa-shopping-cart"></span>
@@ -424,7 +457,7 @@ class Header extends Component {
                 </span>
               </div>
             </div>
-          </form>
+          </div>
         </nav>
       </div>
     );

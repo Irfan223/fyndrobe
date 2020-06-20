@@ -1,4 +1,10 @@
 import React, { Component, Fragment } from "react";
+import { Card, Button } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
 import cssClass from "./address.module.css";
 import { Link } from "react-router-dom";
 import AddressModal from "./address-modal";
@@ -60,46 +66,26 @@ class Address extends Component {
     this.setState({ isAddressModal: false });
   };
   render() {
+    const { Meta } = Card;
     let addressLength;
-    let addressCard;
-    if (this.state.address.length === 0) {
-      addressLength = 0;
-    } else {
-      addressCard = (
-        <div className="col-md-6 col-sm-6 col-12 pl-2">
-          {this.state.address.map((add) => (
-            <div className={`border rounded p-4 ${cssClass.AddressDetail}`}>
-              <div className="font-weight-normal">
-                <div className="pt-2 pb-2">
-                  <strong>
-                    {add.firstName} {add.lastName}
-                  </strong>
-                </div>
-                <div className="font-weight-light small">
-                  {add.houseAndBuildingName}, {add.landmark}, {add.locality},
-                  {add.cityOrDistrict}, {add.state}- {add.pincode}
-                </div>
-                <div className="pt-2">
-                  Mobile: <strong>{add.mobile}</strong>
-                </div>
-              </div>
-              <div className="row pt-4">
-                <div className="col-sm-6 col-6">
-                  <button
-                    onClick={this.OpenAddressModal.bind(this, add._id)}
-                    className={cssClass.editOrRemove}
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div className="col-sm-6 col-6">
-                  <button className={cssClass.editOrRemove}>Remove</button>
-                </div>
-              </div>
-            </div>
-          ))}
+    let AddNewAddressCard;
+    if (this.state.address.length < 5) {
+      AddNewAddressCard = (
+        <div className={cssClass.AddNewAddressOption}>
+          <Card
+          className={cssClass.Card}
+          style={{ width: 300, height: "250px" }}
+          cover=""
+        >
+          <PlusCircleOutlined
+            className={`${cssClass.PlusSign}`}
+            onClick={this.OpenAddressModal}
+          />
+          <p className={`${cssClass.PlusSignText}`}>Add new address</p>
+        </Card>
         </div>
       );
+    } else {
     }
     return (
       <Fragment>
@@ -124,77 +110,74 @@ class Address extends Component {
                 </span>
               </ol>
             </nav> */}
-            <div className={`container`}>
+              <div className={`container`}>
               <div className={`row`}>
-                <div className={`col-md-7 col-sm-7 col-12`}>
+                <div className={`col-md-8 col-sm-8 col-12`}>
                   <p className="text-capitalize">select delivery address</p>
                   <div className={`row  ${cssClass.AddressCard}`}>
                     {this.state.address.map((add) => (
-                      <div className="col-md-6 col-sm-6 col-12 pl-2 pb-2">
-                        <div
-                          className={`border rounded p-4 ${cssClass.AddressDetail}`}
-                        >
-                          <div className="font-weight-normal">
-                            <div className="pt-2 pb-2">
-                              <strong>
-                                {add.firstName} {add.lastName}
-                              </strong>
+                      <Card
+                        key={add._id}
+                        className={cssClass.Card}
+                        style={{ width: '300px',height:'100%', margin: "5px" }}
+                        cover=""
+                        actions={[
+                          <span className="d-flex justify-content-center">
+                            <EditOutlined
+                              className="pt-1 px-1"
+                              key="edit"
+                              onClick={this.OpenAddressModal.bind(
+                                this,
+                                add._id
+                              )}
+                            />
+                            <span className="">Edit</span>
+                          </span>,
+                          <span className="d-flex justify-content-center">
+                            <DeleteOutlined
+                              className="pt-1 px-1"
+                              key="delete"
+                              onClick={() => alert("Deleted")}
+                            />
+                            <span className="">Delete</span>
+                          </span>,
+                        ]}
+                      >
+                        <Meta
+                          title={
+                            <div>
+                              {add.firstName} {add.lastName}
                             </div>
-                            <div className="font-weight-light small">
-                              {add.houseAndBuildingName}, {add.landmark},{" "}
-                              {add.locality},{add.cityOrDistrict}, {add.state}-{" "}
-                              {add.pincode}
+                          }
+                          description={
+                            <div
+                              className={`mt-2 p-0  ${cssClass.AddressDetails}`}
+                            >
+                              {/* <div>{add.houseAndBuildingName}, {add.landmark}, {add.locality}, {add.cityOrDistrict}, {add.state}, {add.pincode}</div> */}
+                              <span>{add.houseAndBuildingName}</span>,
+                              <span> {add.landmark}</span>,
+                              <span>{add.locality}</span>,
+                              <span>{add.cityOrDistrict}</span>,
+                              <span> {add.state}</span>,
+                              <span>{add.pincode}</span>
+                              <p>
+                                Mobile: <strong>{add.mobile}</strong>
+                              </p>
                             </div>
-                            <div className="pt-2">
-                              Mobile: <strong>{add.mobile}</strong>
-                            </div>
-                          </div>
-                          <div className="row pt-4">
-                            <div className="col-sm-6 col-6">
-                              <button
-                                onClick={this.OpenAddressModal.bind(
-                                  this,
-                                  add._id
-                                )}
-                                className={cssClass.editOrRemove}
-                              >
-                                Edit
-                              </button>
-                            </div>
-                            <div className="col-sm-6 col-6">
-                              <button
-                                className={cssClass.editOrRemove}
-                                onClick={this.deleteAddress}
-                              >
-                                Remove
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                          }
+                        />
+                      </Card>
                     ))}
-
-                    <div className="col-md-6 col-sm-6 col-12">
-                      <div className="border rounded">
-                        <div className={` ${cssClass.AddressButton}`}>
-                          <button onClick={this.OpenAddressModal}>
-                            <span className="d-block">
-                              <i
-                                className="fa fa-plus-circle fa-3x"
-                                aria-hidden="true"
-                              ></i>
-                            </span>
-                            ADD ADDRESS
-                          </button>
-                        </div>
-                      </div>
-                    </div>
                   </div>
+
+                  {AddNewAddressCard}
                 </div>
 
                 {/*Start Order Summary */}
-                <div className="col-md-5 col-sm-5 col-12">
+                <div className="col-md-4 col-sm-4 col-12">
+                  {/* <div className="row"> */}
                   <PriceCalculate />
+                  {/* </div> */}
                 </div>
                 {/*end Order Summary */}
               </div>

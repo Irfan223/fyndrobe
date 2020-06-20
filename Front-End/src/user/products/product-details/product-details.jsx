@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "../../../axiosConfig";
+import { Button, notification, Space } from "antd";
+
 import customCSS from "./productDetails.module.css";
 import Cookies from "universal-cookie";
 import { func } from "prop-types";
@@ -91,6 +93,18 @@ class ProductDetails extends Component {
       () => {}
     );
   };
+
+
+  openNotificationWithIcon = (placement, type, message) => {
+    notification[type]({
+      message,
+      placement,
+      top: 70,
+      duration: 2,
+  
+    
+    });
+  };
   addToCart = (event) => {
     event.preventDefault();
 
@@ -112,16 +126,29 @@ class ProductDetails extends Component {
           .post("cart", this.state)
           .then((res) => {
             if (res.status === 200) {
-              alert("product is already in your cart");
+              this.openNotificationWithIcon(
+                "topRight",
+                "warning",
+                " Product is already in cart"
+              );
             } else if (res.status === 201) {
-              alert("product has been added to your cart");
+              // alert("product has been added to your cart");
+              this.openNotificationWithIcon(
+                "topRight",
+                "success",
+                "Product has been added to your cart"
+              );
               console.log(res.data.products.length);
               this.setState({
                 cartItems: res.data.products.length,
                 cartButton: true,
               });
             } else {
-              alert("something error");
+              this.openNotificationWithIcon(
+                "topRight",
+                "success",
+                "Product has been added to your cart"
+              );
             }
           })
           .catch(function (error) {
@@ -285,7 +312,11 @@ class ProductDetails extends Component {
                     </div>
                     {/* End select quantity dropdown */}
                     {/* Start Add To Cart and Go to Cart Button */}
-                    <div className="col-sm-12 col-12">{cartButton}</div>
+                    <div
+                      className={`col-md-12 col-sm-12 col-12 ${customCSS.AddToCartButton}`}
+                    >
+                      {cartButton}
+                    </div>
                     {/* End Add To Cart and Go to Cart Button */}
                   </div>
                   <div className={`row ${customCSS.productDetails}`}>
