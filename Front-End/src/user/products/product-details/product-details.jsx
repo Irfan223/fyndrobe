@@ -15,6 +15,7 @@ class ProductDetails extends Component {
     data: [],
     // value: 1,
     userId: cookies.get("userId"),
+    isLoggedIn: localStorage.getItem("isLoggedIn"),
     productId: "",
     category: "",
     productTitle: "",
@@ -94,15 +95,12 @@ class ProductDetails extends Component {
     );
   };
 
-
   openNotificationWithIcon = (placement, type, message) => {
     notification[type]({
       message,
       placement,
       top: 70,
       duration: 2,
-  
-    
     });
   };
   addToCart = (event) => {
@@ -122,38 +120,102 @@ class ProductDetails extends Component {
         sub_total: totalPrice,
       },
       () => {
-        axios
-          .post("cart", this.state)
-          .then((res) => {
-            if (res.status === 200) {
-              this.openNotificationWithIcon(
-                "topRight",
-                "warning",
-                " Product is already in cart"
-              );
-            } else if (res.status === 201) {
-              // alert("product has been added to your cart");
-              this.openNotificationWithIcon(
-                "topRight",
-                "success",
-                "Product has been added to your cart"
-              );
-              console.log(res.data.products.length);
-              this.setState({
-                cartItems: res.data.products.length,
-                cartButton: true,
-              });
-            } else {
-              this.openNotificationWithIcon(
-                "topRight",
-                "success",
-                "Product has been added to your cart"
-              );
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        if (
+          this.state.isLoggedIn === "null"
+        ) {
+          const {
+            productId,
+            category,
+            productTitle,
+            coupon_discount,
+            extra_price,
+            gst,
+            image,
+            quantity,
+            price,
+            size,
+            totalSize,
+            color,
+            spl_price,
+            stock,
+            sub_total,
+          } = this.state;
+          const data = {
+            productId,
+            category,
+            productTitle,
+            coupon_discount,
+            extra_price,
+            gst,
+            image,
+            quantity,
+            price,
+            size,
+            totalSize,
+            color,
+            spl_price,
+            stock,
+            sub_total,
+          };
+          let localcart = [];
+          if (!localStorage.getItem('localcart')) {
+            localcart.push(data);
+            localStorage.setItem("localcart", JSON.stringify(localcart));
+            return;
+          }
+          localcart = JSON.parse(localStorage.getItem('localcart'));
+          let cartIndex = localcart.findIndex(item => item.productId === productId && item.size === size);
+          if (cartIndex > -1) {
+            this.openNotificationWithIcon(
+              "topRight",
+              "warning",
+              " Product is already in cart"
+            );
+          } else {
+            localcart.push(data);
+            localStorage.setItem('localcart', JSON.stringify(localcart));
+            this.setState({
+              cartItems: localcart.length
+            });
+            this.openNotificationWithIcon(
+              "topRight",
+              "success",
+              "Product has been added to your cart"
+            );
+          }
+        } else {
+          axios
+            .post("cart", this.state)
+            .then((res) => {
+              if (res.status === 200) {
+                this.openNotificationWithIcon(
+                  "topRight",
+                  "warning",
+                  " Product is already in cart"
+                );
+              } else if (res.status === 201) {
+                this.openNotificationWithIcon(
+                  "topRight",
+                  "success",
+                  "Product has been added to your cart"
+                );
+                console.log(res.data.products.length);
+                this.setState({
+                  cartItems: res.data.products.length,
+                  cartButton: true,
+                });
+              } else {
+                this.openNotificationWithIcon(
+                  "topRight",
+                  "success",
+                  "Product has been added to your cart"
+                );
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
       }
     );
   };
@@ -206,19 +268,20 @@ class ProductDetails extends Component {
                   </div>
                   {/* Start Mobile View Carousel */}
                   <div className="row">
-                  <div className="col-12 d-block d-sm-none">
-                    <Carousel autoplay>
-                      {item.color.image.map((img) => (
-                        <img
-                          src={img}
-                          width="100%"
-                          className="img-responsive"
-                        />
-                      ))}
-                    </Carousel>
-                    {/* End Mobile View Carousel */}
+                    <div className="col-12 d-block d-sm-none">
+                      <Carousel autoplay>
+                        {item.color.image.map((img) => (
+                          <img
+                            src={img}
+                            width="100%"
+                            className="img-responsive"
+                          />
+                        ))}
+                      </Carousel>
+                      {/* End Mobile View Carousel */}
+                    </div>
                   </div>
-                  </div><br />
+                  <br />
                 </div>
                 <div className="col-sm-5 col-md-5 col-lg-5 ">
                   <h6 className="font-weight-normal">

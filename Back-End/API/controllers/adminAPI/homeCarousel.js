@@ -5,7 +5,7 @@ module.exports.GetHomeCarousel = function(req, res, next) {
         if (error) {
             res.send(error);
         }
-        console.log(data);
+        // console.log(data);
         res.json(data);
     });
   }

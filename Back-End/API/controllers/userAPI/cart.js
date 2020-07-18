@@ -13,7 +13,7 @@ module.exports.GetCart = async function (req, res) {
 }
 // Post Cart
 module.exports.PostCart = async function (req, res, next) {
-  console.log(req.body);
+  // console.log(req.body);
   const { userId, productId, category, productTitle, coupon_discount, gst, extra_price, image, quantity, size, totalSize, color, spl_price, stock, sub_total, price, component } = req.body;
   try {
     let cart = await Cart.findOne({ userId });
@@ -25,7 +25,7 @@ module.exports.PostCart = async function (req, res, next) {
         let itemIndex = cart.products.findIndex(p => p.productId == productId && p.size == size || p.quantity == quantity);
         // GST for clothes
         //
-        console.log('cart component')
+        // console.log('cart component')
         if (itemIndex > -1) {
           let productItem = cart.products[itemIndex];
           productItem.quantity = quantity;
@@ -41,7 +41,7 @@ module.exports.PostCart = async function (req, res, next) {
         }
       } else {
         //product does not exists in cart, add new item
-        console.log('add to cart component')
+        // console.log('add to cart component')
         let newItemIndex = cart.products.findIndex(p => p.productId == productId && p.size == size);
         if (newItemIndex > -1) {
           return res.status(200).send('product is already in your cart');
@@ -64,25 +64,51 @@ module.exports.PostCart = async function (req, res, next) {
       return res.status(201).send(newCart);
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send("Something went wrong");
   }
 }
 // Update Cart
-module.exports.UpdateCart = async function (req, res) {
-  // console.log(req.params);
-  const userId = req.params.userId;
-  const productId = req.params.productId;
-  const size = req.params.size
-  // console.log(userId + ' ' + productId)
-  try {
+module.exports.UpdateCart = async function (req, res, next) {
+//  console.log(req.body)
+   const {userId, localcart} = req.body;
+   try {
+    let cart = await Cart.findOne({ userId });
+    if (cart) {
+      //cart exists for user
+      if (cart.products.length === 0) { // cart exist but item not in cart
+        cart.products = localcart;
+      } else { // items in cart already
+      let cartcopy = localcart.filter(o1 => !cart.products.some(o2 => o1.productId === o2.productId && o1.size === o2.size));
+      cart.products = cart.products.concat(cartcopy);
+      }
+      cart = await cart.save();
+      return res.status(201).send(cart);
+    } else { // if cart is not availabe for user, create cart and push value from localstorage cart
+      console.log('not available')
+      const newCart = await Cart.create({
+        userId,
+        products: localcart
+      });
+      return res.status(201).send(newCart);
+    }
+  } catch (err) {
+    // console.log(err);
+    res.status(500).send("Something went wrong");
+  }
+  
+}
+// Delete Cart
+module.exports.DeleteCart = async function (req, res) {
+  const {userId, productId, size} = req.params; 
+try {
     let cart = await Cart.findOne({ userId });
     if (cart) {
       //cart exists for user
       let itemIndex = cart.products.findIndex(p => p.productId == productId && p.size == size);
 
       if (itemIndex > -1) {
-        console.log(itemIndex)
+        // console.log(itemIndex)
         //product exists in the cart, delete the product from cart
         cart.products.splice(itemIndex, 1);
       } else {
@@ -90,14 +116,15 @@ module.exports.UpdateCart = async function (req, res) {
       }
       cart = await cart.save();
       return res.status(201).send(cart);
+    } else { // if cart is not availabe for user, create cart and push value from localstorage cart
+      const newCart = await Cart.create({
+        userId,
+        products: localcart
+      });
+      return res.status(201).send(newCart);
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send("Something went wrong");
   }
-}
-// Delete Cart
-module.exports.DeleteCart = function (req, res) {
-  const userId = req.arams.userId;
-
 }

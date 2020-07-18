@@ -41,6 +41,7 @@ class Cart extends Component {
     paybleAmount: 0,
     quantityArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     totalSize: [],
+    isLoggedIn: localStorage.getItem("isLoggedIn"),
     userId: cookies.get("userId"),
     removeItemId: "",
     removeItemSize: "",
@@ -58,36 +59,26 @@ class Cart extends Component {
     this.getCart();
   }
   getCart() {
-    axios
-      .get("cart" + "/" + this.state.userId)
-      .then((res) => {
-        // console.log(res.data.products);
-        // var totalAmount = 0;
+        var localcart = JSON.parse(localStorage.getItem('localcart'));
         var BagTotal = 0;
         var BagDiscount = 0;
         var couponDiscount = 0;
         var orderTotal = 0;
-        // var tempArray = [];
-        res.data.products.map((data) => {
-          //   tempArray.push(data);
+        localcart.map((data) => {
           BagTotal += data.price * data.quantity;
           BagDiscount += (data.price - data.spl_price) * data.quantity;
           couponDiscount += data.coupon_discount;
           orderTotal += data.spl_price * data.quantity;
-          // console.log('order total'+ orderTotal);
-
-          // BagTotal+=data.spl_price;
         });
 
         this.setState(
           {
-            // totalSize: tempArray,
             spinning:false,
             BagTotal: BagTotal,
             BagDiscount: BagDiscount,
             couponDiscount: couponDiscount,
             orderTotal: orderTotal,
-            cart: res.data.products,
+            cart: localcart,
           },
           () => {
             this.props.cartUpdate(
@@ -100,21 +91,30 @@ class Cart extends Component {
             );
           }
         );
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
   removeItemFromCart = (id, size, event) => {
-    // alert(id + 'size' + size + 'userId=' +this.state.userId)
+    if(this.state.isLoggedIn === 'null') {
+      const cart = this.state.cart;
+        let cartIndex = cart.findIndex(item => item.productId === id && item.size === size);
+        if (cartIndex > -1) {
+          cart.splice(cartIndex, 1);
+          localStorage.setItem('localcart', JSON.stringify(cart));
+          this.setState({
+            cartItems: cart.length,
+            loading: false,
+          }, () => {
+            this.getCart();
+          });
+          this.closeRemoveModal();
+        }
+    } else {
     this.setState({
       loading: true,
     });
     const userId = this.state.userId;
     axios
-      .patch("cart" + "/" + userId + "/" + id + "/" + size)
+      .delete("cart" + "/" + userId + "/" + id + "/" + size)
       .then((res) => {
-        // alert(res.status);
         if (res.status === 201) {
           this.setState(
             {
@@ -122,6 +122,7 @@ class Cart extends Component {
               loading: false,
             },
             () => {
+              localStorage.setItem('localcart', JSON.stringify(res.data.products));
               this.getCart();
             }
           );
@@ -131,6 +132,7 @@ class Cart extends Component {
       .catch(function (error) {
         console.log(error);
       });
+    }
   };
   OpenRemoveModal = (id, size, event) => {
     this.setState(
@@ -205,13 +207,6 @@ class Cart extends Component {
         <div className="App">
           <Header cartItems={cartItems} />
           <div className="body">
-            {/* <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <span className="breadcrumb-item">Cart</span>
-              <span className="breadcrumb-item">Delivery</span>
-              <span className="breadcrumb-item">Payment</span>
-            </ol>
-          </nav> */}
             <div className="container">
               {!this.state.cart.length == 0 ? (
                 <div className="row mt-4">

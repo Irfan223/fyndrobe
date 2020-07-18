@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "../../axiosConfig";
 import Cookies from "universal-cookie";
 import { withRouter } from "react-router";
-import logo from '../../assets/images/FyndrobeLogo.png';
+import logo from "../../assets/images/FyndrobeLogo.png";
 const Drawer = React.lazy(() => import("../Drawer/drawer"));
 const cookies = new Cookies();
 class Header extends Component {
@@ -24,23 +24,52 @@ class Header extends Component {
     this.getCart();
   }
   getCart() {
-    axios
-      .get("cart" + "/" + this.state.userId)
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          cart: res.data.products,
-          totalProducts: res.data.products.length,
+    if (this.state.isLoggedIn === "null" && localStorage.getItem("localcart")) {
+      this.setState(
+        {
+          cart: JSON.parse(localStorage.getItem("localcart")),
+        },
+        () => {
+          console.log("not signed in");
+        }
+      );
+    } else {
+      axios
+        .get("cart/"+ this.state.userId)
+        .then((res) => {
+          var cartcopy = res.data.products;
+          if(localStorage.getItem("localcart")) {
+          let localcart = JSON.parse(localStorage.getItem("localcart"));
+          cartcopy = cartcopy.concat(localcart);
+          }
+          cartcopy = cartcopy.filter(
+            (v, i, a) =>
+              a.findIndex(
+                (t) => t.productId === v.productId && t.size === v.size
+              ) === i
+          );
+          this.setState(
+            {
+              cart: cartcopy,
+            },
+            () => {
+              localStorage.setItem(
+                "localcart",
+                JSON.stringify(this.state.cart)
+              );
+              console.log("signed in");
+            }
+          );
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.cartItems !== this.props.cartItems) {
       this.setState({
-        totalProducts: this.props.cartItems,
+        cart: JSON.parse(localStorage.getItem("localcart")),
       });
     }
   }
@@ -51,6 +80,7 @@ class Header extends Component {
   };
   logout = (event) => {
     localStorage.setItem("isLoggedIn", null);
+    let localcart = JSON.parse(localStorage.getItem("localcart"));
     cookies.remove("userId", { path: "/" });
     cookies.remove("firstName", { path: "/" });
     cookies.remove("lastName", { path: "/" });
@@ -58,18 +88,28 @@ class Header extends Component {
     cookies.remove("mobile", { path: "/" });
     cookies.remove("token", { path: "/" });
     cookies.remove("address", { path: "/" });
-    this.setState(
-      {
-        isLoggedIn: localStorage.getItem("isLoggedIn"),
-      },
-      () => {
-        window.location.reload(false);
-      }
-    );
+    const param = {
+      userId: this.state.userId,
+      localcart: localcart
+    }
+    axios
+      .patch("cart", param)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          localStorage.removeItem("localcart");
+          this.setState(
+            {
+              isLoggedIn: localStorage.getItem("isLoggedIn"),
+            },
+            () => {
+              window.location.reload(false);
+            }
+          );
+        }
+      });
   };
   render() {
-    console.log("LoggedIN User iD " + cookies.get("userId"));
-
     const isLoggedIn = this.state.isLoggedIn;
     const userID = cookies.get("userId");
     const { collapsed } = this.state;
@@ -129,7 +169,7 @@ class Header extends Component {
           className={`navbar shadow-sm   navbar-expand-lg navbar-light bg-light fixed-top ${cssClass.Navbar}`}
         >
           <a className={`navbar-brand ${cssClass.NavbarBrand}`} href="/">
-           <img src={logo} width="170px" />
+            <img src={logo} width="170px" />
           </a>
           {/* Start Mobile View Navigation */}
           <div className="d-block d-sm-none">
@@ -217,7 +257,6 @@ class Header extends Component {
                     className={`dropdown-item ${cssClass.DropdownItem}`}
                   >
                     Kurtas
-                   
                   </Link>
 
                   <Link
@@ -238,7 +277,7 @@ class Header extends Component {
                     to="/products/women/Dupattas-and-Shawls"
                     className={`dropdown-item ${cssClass.DropdownItem}`}
                   >
-                     Dupattas and Shawls
+                    Dupattas and Shawls
                   </Link>
                 </div>
               </li>
@@ -453,7 +492,7 @@ class Header extends Component {
               </li>
               <div className={cssClass.cartItem}>
                 <span className={cssClass.circle}>
-                  {this.state.totalProducts}
+                  {this.state.cart.length}
                 </span>
               </div>
             </div>

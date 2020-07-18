@@ -4,7 +4,7 @@ const router = express.Router();
 const Razorpay = require('../controllers/razorpay/createOrder');
 // Admin js file---
 const Admin            = require('../controllers/adminAPI/adminLogin');
-const AdminSignup     = require('../controllers/adminAPI/adminSignup')
+const AdminSignup      = require('../controllers/adminAPI/adminSignup')
 const InventryAPI      = require('../controllers/adminAPI/inventory');
 const ImageUpload      = require('../controllers/adminAPI/imageUpload');
 const OrderAPI         = require('../controllers/adminAPI/orders');
@@ -40,8 +40,9 @@ router.route('/address').put(Address.UpdateAddress);
 router.route('/product').post(Product.Product);
 router.route('/cart/:userId').get(Cart.GetCart);
 router.route('/cart').post(Cart.PostCart);
-router.route('/cart/:userId/:productId/:size').patch(Cart.UpdateCart);
-router.route('/cart/:userId').delete(Cart.DeleteCart);
+// router.route('/cart/:userId/:productId/:size').patch(Cart.UpdateCart);
+router.route('/cart').patch(Cart.UpdateCart);
+router.route('/cart/:userId/:productId/:size').delete(Cart.DeleteCart);
 router.route('/productDetails').post(ProductDetails.postProductDetails)
 // export routes
 module.exports = router;

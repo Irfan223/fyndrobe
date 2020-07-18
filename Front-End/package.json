@@ -1,10 +1,10 @@
 {
-  "name": "fashion-focus",
+  "name": "fyndrobe",
   "version": "2.6.0",
-  "description": "Fashion Focus",
+  "description": "online fashion store",
   "author": "Irfan",
   "homepage": "https://coreui.io",
-  "copyright": "Copyright 2017-2019 Fashion Focus",
+  "copyright": "Copyright 2020 fyndrobe",
   "license": "MIT",
   "private": true,
   "repository": {
