@@ -34,7 +34,7 @@ class Home extends Component {
             items: copyItmes,
           },
           () => {
-            console.log(this.state.items);
+            // console.log(this.state.items);
           }
         );
       })

@@ -1,12 +1,12 @@
 const express = require('express'); // express middleware
 const cookieParser = require('cookie-parser'); // cookie parse middleware
 const app = express();
-const cors = require('cors');
+const cors = require('cors'); // middleware
 const port = process.env.PORT || 5000; // port number 
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'build')));
 const routes = require('./API/routes/index.js');
-const bodyParser = require('body-parser');  // body-parser
+const bodyParser = require('body-parser');  // body-parser middleware
 app.use(bodyParser.json()); // parses application/json
 app.use(bodyParser.urlencoded({ extended: true }));  // parses application/x-www-form-urlencoded
 // a middleware with no mount path; gets executed for every request to the app

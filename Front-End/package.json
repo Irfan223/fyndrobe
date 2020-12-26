@@ -3,7 +3,6 @@
   "version": "2.6.0",
   "description": "online fashion store",
   "author": "Irfan",
-  "homepage": "https://coreui.io",
   "copyright": "Copyright 2020 fyndrobe",
   "license": "MIT",
   "private": true,
@@ -71,7 +70,7 @@
     "eject": "react-scripts eject"
   },
   "bugs": {
-    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
+    "url": "https://github.com/Irfan223/fyndrobe"
   },
   "eslintConfig": {
     "extends": "react-app"

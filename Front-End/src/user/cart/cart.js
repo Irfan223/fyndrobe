@@ -14,7 +14,7 @@ import Cookies from "universal-cookie";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import EmptyCart from "../../assets/images/EmptyCart.jpg";
-
+import * as getCartFun from "../../helpers/getCartHelper";
 import emptyCartImage from "../../assets/img/brand/EmptyCart.svg";
 const PriceCalculate = React.lazy(() =>
   import("../price-calculate/price-calculate")
@@ -56,7 +56,7 @@ class Cart extends Component {
     spinning:true
   };
   componentDidMount() {
-    this.getCart();
+   this.getCart();
   }
   getCart() {
         var localcart = JSON.parse(localStorage.getItem('localcart'));
@@ -93,7 +93,7 @@ class Cart extends Component {
         );
   }
   removeItemFromCart = (id, size, event) => {
-    if(this.state.isLoggedIn === 'null') {
+    if(this.state.userId === undefined) {
       const cart = this.state.cart;
         let cartIndex = cart.findIndex(item => item.productId === id && item.size === size);
         if (cartIndex > -1) {

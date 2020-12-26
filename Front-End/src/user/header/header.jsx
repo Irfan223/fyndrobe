@@ -7,6 +7,7 @@ import axios from "../../axiosConfig";
 import Cookies from "universal-cookie";
 import { withRouter } from "react-router";
 import logo from "../../assets/images/FyndrobeLogo.png";
+import * as getCartFun from "../../helpers/getCartHelper";
 const Drawer = React.lazy(() => import("../Drawer/drawer"));
 const cookies = new Cookies();
 class Header extends Component {
@@ -21,26 +22,35 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    this.getCart();
+    getCartFun.getCart(this.state.userId).then((res) => {
+      console.log(res);
+      this.setState({
+        cart: res,
+      });
+    });
   }
   getCart() {
-    if (this.state.isLoggedIn === "null" && localStorage.getItem("localcart")) {
-      this.setState(
-        {
-          cart: JSON.parse(localStorage.getItem("localcart")),
-        },
-        () => {
-          console.log("not signed in");
-        }
-      );
+    if (this.state.userId === undefined) {
+      // alert(localStorage.getItem("localcart"));
+      if (localStorage.getItem("localcart")) {
+        this.setState(
+          {
+            cart: JSON.parse(localStorage.getItem("localcart")),
+          },
+          () => {
+            console.log("not signed in");
+          }
+        );
+      }
     } else {
+      console.log(this.state.userId);
       axios
-        .get("cart/"+ this.state.userId)
+        .get("cart/" + this.state.userId)
         .then((res) => {
           var cartcopy = res.data.products;
-          if(localStorage.getItem("localcart")) {
-          let localcart = JSON.parse(localStorage.getItem("localcart"));
-          cartcopy = cartcopy.concat(localcart);
+          if (localStorage.getItem("localcart")) {
+            let localcart = JSON.parse(localStorage.getItem("localcart"));
+            cartcopy = cartcopy.concat(localcart);
           }
           cartcopy = cartcopy.filter(
             (v, i, a) =>
@@ -90,24 +100,22 @@ class Header extends Component {
     cookies.remove("address", { path: "/" });
     const param = {
       userId: this.state.userId,
-      localcart: localcart
-    }
-    axios
-      .patch("cart", param)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 201) {
-          localStorage.removeItem("localcart");
-          this.setState(
-            {
-              isLoggedIn: localStorage.getItem("isLoggedIn"),
-            },
-            () => {
-              window.location.reload(false);
-            }
-          );
-        }
-      });
+      localcart: localcart,
+    };
+    axios.patch("cart", param).then((res) => {
+      console.log(res);
+      if (res.status === 201) {
+        localStorage.removeItem("localcart");
+        this.setState(
+          {
+            isLoggedIn: localStorage.getItem("isLoggedIn"),
+          },
+          () => {
+            window.location.reload(false);
+          }
+        );
+      }
+    });
   };
   render() {
     const isLoggedIn = this.state.isLoggedIn;

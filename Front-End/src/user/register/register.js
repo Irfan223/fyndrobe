@@ -12,18 +12,30 @@ const InputField = React.lazy(() =>
 class Register extends Component {
   state = {
     prevUrl: localStorage.getItem("curUrl"),
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobile: "",
-    password: "",
+    firstName: " ",
+    lastName: " ",
+    email: " ",
+    mobile: " ",
+    password: " ",
+    latitude: null,
+    longitude: null
   };
-
-  //   onChange = (event) => {
-  //     this.setState({
-  //       [event.target.name]: event.target.value,
-  //     });
-  //   };
+componentDidMount() {
+  const location = window.navigator && window.navigator.geolocation
+    if (location) {
+      location.getCurrentPosition((position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+        // alert(position.coords.latitude+ 'and'+position.coords.longitude)
+      }, (error) => {
+        // this.setState({ latitude: null, longitude: null });
+        console.log(error);
+      })
+    }
+}
+ 
   signUp = (values) => {
     // event.preventDefault();
     this.setState({
@@ -33,8 +45,10 @@ class Register extends Component {
       mobile: this.state.mobile,
       password: this.state.password,
     });
+    
+    values['latitude'] = this.state.latitude;
+    values['longitude'] = this.state.longitude;
     console.log(values);
-
     axios
       .post("userRegister", values)
       .then((res) => {

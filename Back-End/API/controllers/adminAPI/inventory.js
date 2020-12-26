@@ -56,6 +56,7 @@ module.exports.GetInventory = function (req, res, next) {
         });
     } else {
         Product.find({}, function (err, data) {
+            console.log(data);
             res.json(data);
         })
     }
